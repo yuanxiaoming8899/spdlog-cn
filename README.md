@@ -81,32 +81,7 @@ $ <span class="pl-s1">cmake .. <span class="pl-k">&amp;&amp;</span> make -j</spa
     <span class="pl-c1">SPDLOG_DEBUG</span>(<span class="pl-s"><span class="pl-pds">"</span>Some debug message<span class="pl-pds">"</span></span>);
 }
 </pre><div class="zeroclipboard-container">
-    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="#include &quot;spdlog/spdlog.h&quot;
-
-int main() 
-{
-    spdlog::info(&quot;Welcome to spdlog!&quot;);
-    spdlog::error(&quot;Some error message with arg: {}&quot;, 1);
-    
-    spdlog::warn(&quot;Easy padding in numbers like {:08d}&quot;, 12);
-    spdlog::critical(&quot;Support for int: {0:d};  hex: {0:x};  oct: {0:o}; bin: {0:b}&quot;, 42);
-    spdlog::info(&quot;Support for floats {:03.2f}&quot;, 1.23456);
-    spdlog::info(&quot;Positional args are {1} {0}..&quot;, &quot;too&quot;, &quot;supported&quot;);
-    spdlog::info(&quot;{:<30}&quot;, &quot;left aligned&quot;);
-    
-    spdlog::set_level(spdlog::level::debug); // Set global log level to debug
-    spdlog::debug(&quot;This message should be displayed..&quot;);    
-    
-    // change log pattern
-    spdlog::set_pattern(&quot;[%H:%M:%S %z] [%n] [%^---%L---%$] [thread %t] %v&quot;);
-    
-    // Compile time log levels
-    // Note that this does not change the current log level, it will only
-    // remove (depending on SPDLOG_ACTIVE_LEVEL) the call on the release code.
-    SPDLOG_TRACE(&quot;Some trace message with param {}&quot;, 42);
-    SPDLOG_DEBUG(&quot;Some debug message&quot;);
-}
-" tabindex="0" role="button">
+   
       <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
     <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
 </svg>
