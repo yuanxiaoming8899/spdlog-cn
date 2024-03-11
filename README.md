@@ -97,15 +97,7 @@ $ <span class="pl-s1">cmake .. <span class="pl-k">&amp;&amp;</span> make -j</spa
     <span class="pl-k">auto</span> err_logger = <span class="pl-c1">spdlog::stderr_color_mt</span>(<span class="pl-s"><span class="pl-pds">"</span>stderr<span class="pl-pds">"</span></span>);    
     <span class="pl-c1">spdlog::get</span>(<span class="pl-s"><span class="pl-pds">"</span>console<span class="pl-pds">"</span></span>)-&gt;<span class="pl-c1">info</span>(<span class="pl-s"><span class="pl-pds">"</span>loggers can be retrieved from a global registry using the spdlog::get(logger_name)<span class="pl-pds">"</span></span>);
 }</pre><div class="zeroclipboard-container">
-    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="#include &quot;spdlog/spdlog.h&quot;
-#include &quot;spdlog/sinks/stdout_color_sinks.h&quot;
-void stdout_example()
-{
-    // create a color multi-threaded logger
-    auto console = spdlog::stdout_color_mt(&quot;console&quot;);    
-    auto err_logger = spdlog::stderr_color_mt(&quot;stderr&quot;);    
-    spdlog::get(&quot;console&quot;)->info(&quot;loggers can be retrieved from a global registry using the spdlog::get(logger_name)&quot;);
-}" tabindex="0" role="button">
+    
      
 </svg>
     </clipboard-copy>
@@ -124,18 +116,7 @@ void stdout_example()
         std::cout &lt;&lt; <span class="pl-s"><span class="pl-pds">"</span>Log init failed: <span class="pl-pds">"</span></span> &lt;&lt; ex.<span class="pl-c1">what</span>() &lt;&lt; std::endl;
     }
 }</pre><div class="zeroclipboard-container">
-    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="#include &quot;spdlog/sinks/basic_file_sink.h&quot;
-void basic_logfile_example()
-{
-    try 
-    {
-        auto logger = spdlog::basic_logger_mt(&quot;basic_logger&quot;, &quot;logs/basic-log.txt&quot;);
-    }
-    catch (const spdlog::spdlog_ex &amp;ex)
-    {
-        std::cout << &quot;Log init failed: &quot; << ex.what() << std::endl;
-    }
-}" tabindex="0" role="button">
+    
     
 </svg>
     </clipboard-copy>
@@ -150,14 +131,7 @@ void basic_logfile_example()
     <span class="pl-k">auto</span> max_files = <span class="pl-c1">3</span>;
     <span class="pl-k">auto</span> logger = <span class="pl-c1">spdlog::rotating_logger_mt</span>(<span class="pl-s"><span class="pl-pds">"</span>some_logger_name<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>logs/rotating.txt<span class="pl-pds">"</span></span>, max_size, max_files);
 }</pre><div class="zeroclipboard-container">
-    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="#include &quot;spdlog/sinks/rotating_file_sink.h&quot;
-void rotating_example()
-{
-    // Create a file rotating logger with 5 MB size max and 3 rotated files
-    auto max_size = 1048576 * 5;
-    auto max_files = 3;
-    auto logger = spdlog::rotating_logger_mt(&quot;some_logger_name&quot;, &quot;logs/rotating.txt&quot;, max_size, max_files);
-}" tabindex="0" role="button">
+   
     
 </svg>
     </clipboard-copy>
@@ -171,14 +145,7 @@ void rotating_example()
     <span class="pl-k">auto</span> logger = <span class="pl-c1">spdlog::daily_logger_mt</span>(<span class="pl-s"><span class="pl-pds">"</span>daily_logger<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>logs/daily.txt<span class="pl-pds">"</span></span>, <span class="pl-c1">2</span>, <span class="pl-c1">30</span>);
 }
 </pre><div class="zeroclipboard-container">
-    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="
-#include &quot;spdlog/sinks/daily_file_sink.h&quot;
-void daily_example()
-{
-    // Create a daily logger - a new file is created every day at 2:30 am
-    auto logger = spdlog::daily_logger_mt(&quot;daily_logger&quot;, &quot;logs/daily.txt&quot;, 2, 30);
-}
-" tabindex="0" role="button">
+    
      
 </svg>
     </clipboard-copy>
@@ -198,19 +165,7 @@ void daily_example()
 <span class="pl-c"><span class="pl-c">//</span> e.g. if some error happened:</span>
 <span class="pl-en">spdlog::dump_backtrace</span>(); <span class="pl-c"><span class="pl-c">//</span> log them now! show the last 32 messages</span>
 <span class="pl-c"><span class="pl-c">//</span> or my_logger-&gt;dump_backtrace(32)..</span></pre><div class="zeroclipboard-container">
-    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="// Debug messages can be stored in a ring buffer instead of being logged immediately.
-// This is useful to display debug logs only when needed (e.g. when an error happens).
-// When needed, call dump_backtrace() to dump them to your log.
-
-spdlog::enable_backtrace(32); // Store the latest 32 messages in a buffer. 
-// or my_logger->enable_backtrace(32)..
-for(int i = 0; i < 100; i++)
-{
-  spdlog::debug(&quot;Backtrace message {}&quot;, i); // not logged yet..
-}
-// e.g. if some error happened:
-spdlog::dump_backtrace(); // log them now! show the last 32 messages
-// or my_logger->dump_backtrace(32).." tabindex="0" role="button">
+   
     
 </svg>
     </clipboard-copy>
@@ -221,10 +176,7 @@ spdlog::dump_backtrace(); // log them now! show the last 32 messages
 <span class="pl-c"><span class="pl-c">//</span> warning: only use if all your loggers are thread-safe ("_mt" loggers)</span>
 <span class="pl-en">spdlog::flush_every</span>(std::chrono::seconds(<span class="pl-c1">3</span>));
 </pre><div class="zeroclipboard-container">
-    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="// periodically flush all *registered* loggers every 3 seconds:
-// warning: only use if all your loggers are thread-safe (&quot;_mt&quot; loggers)
-spdlog::flush_every(std::chrono::seconds(3));
-" tabindex="0" role="button">
+   
      
 </svg>
     </clipboard-copy>
@@ -240,16 +192,7 @@ spdlog::flush_every(std::chrono::seconds(3));
     <span class="pl-c1">spdlog::debug</span>(<span class="pl-s"><span class="pl-pds">"</span>Elapsed {:.3}<span class="pl-pds">"</span></span>, sw);       
 }
 </pre><div class="zeroclipboard-container">
-    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="// Stopwatch support for spdlog
-#include &quot;spdlog/stopwatch.h&quot;
-void stopwatch_example()
-{
-    spdlog::stopwatch sw;    
-    spdlog::debug(&quot;Elapsed {}&quot;, sw);
-    spdlog::debug(&quot;Elapsed {:.3}&quot;, sw);       
-}
-" tabindex="0" role="button">
-      
+    
 </svg>
     </clipboard-copy>
   </div></div>
@@ -278,29 +221,7 @@ void stopwatch_example()
     <span class="pl-c"><span class="pl-c">//</span> logger-&gt;info("uppercase, no delimiters, no position info: {:Xsp}", spdlog::to_hex(buf));</span>
 }
 </pre><div class="zeroclipboard-container">
-    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="// many types of std::container<char> types can be used.
-// ranges are supported too.
-// format flags:
-// {:X} - print in uppercase.
-// {:s} - don't separate each byte with space.
-// {:p} - don't print the position on each line start.
-// {:n} - don't split the output into lines.
-// {:a} - show ASCII if :n is not set.
-
-#include &quot;spdlog/fmt/bin_to_hex.h&quot;
-
-void binary_example()
-{
-    auto console = spdlog::get(&quot;console&quot;);
-    std::array<char, 80> buf;
-    console->info(&quot;Binary example: {}&quot;, spdlog::to_hex(buf));
-    console->info(&quot;Another binary example:{:n}&quot;, spdlog::to_hex(std::begin(buf), std::begin(buf) + 10));
-    // more examples:
-    // logger->info(&quot;uppercase: {:X}&quot;, spdlog::to_hex(buf));
-    // logger->info(&quot;uppercase, no delimiters: {:Xs}&quot;, spdlog::to_hex(buf));
-    // logger->info(&quot;uppercase, no delimiters, no position info: {:Xsp}&quot;, spdlog::to_hex(buf));
-}
-" tabindex="0" role="button">
+    
      
 </svg>
     </clipboard-copy>
@@ -323,23 +244,7 @@ void binary_example()
     logger.<span class="pl-c1">warn</span>(<span class="pl-s"><span class="pl-pds">"</span>this should appear in both console and file<span class="pl-pds">"</span></span>);
     logger.<span class="pl-c1">info</span>(<span class="pl-s"><span class="pl-pds">"</span>this message should not appear in the console, only in the file<span class="pl-pds">"</span></span>);
 }</pre><div class="zeroclipboard-container">
-    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="
-// create a logger with 2 targets, with different log levels and formats.
-// The console will show only warnings or errors, while the file will log all.
-void multi_sink_example()
-{
-    auto console_sink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
-    console_sink->set_level(spdlog::level::warn);
-    console_sink->set_pattern(&quot;[multi_sink_example] [%^%l%$] %v&quot;);
-
-    auto file_sink = std::make_shared<spdlog::sinks::basic_file_sink_mt>(&quot;logs/multisink.txt&quot;, true);
-    file_sink->set_level(spdlog::level::trace);
-
-    spdlog::logger logger(&quot;multi_sink&quot;, {console_sink, file_sink});
-    logger.set_level(spdlog::level::debug);
-    logger.warn(&quot;this should appear in both console and file&quot;);
-    logger.info(&quot;this message should not appear in the console, only in the file&quot;);
-}" tabindex="0" role="button">
+    
       
 </svg>
     </clipboard-copy>
@@ -361,22 +266,7 @@ void multi_sink_example()
     logger.<span class="pl-c1">info</span>(<span class="pl-s"><span class="pl-pds">"</span>some info log<span class="pl-pds">"</span></span>);
     logger.<span class="pl-c1">error</span>(<span class="pl-s"><span class="pl-pds">"</span>critical issue<span class="pl-pds">"</span></span>); <span class="pl-c"><span class="pl-c">//</span> will notify you</span>
 }</pre><div class="zeroclipboard-container">
-    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="
-// create a logger with a lambda function callback, the callback will be called
-// each time something is logged to the logger
-void callback_example()
-{
-    auto callback_sink = std::make_shared<spdlog::sinks::callback_sink_mt>([](const spdlog::details::log_msg &amp;msg) {
-         // for example you can be notified by sending an email to yourself
-    });
-    callback_sink->set_level(spdlog::level::err);
-
-    auto console_sink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
-    spdlog::logger logger(&quot;custom_callback_logger&quot;, {console_sink, callback_sink});
-
-    logger.info(&quot;some info log&quot;);
-    logger.error(&quot;critical issue&quot;); // will notify you
-}" tabindex="0" role="button">
+   
     
 </svg>
     </clipboard-copy>
@@ -394,17 +284,7 @@ void callback_example()
     <span class="pl-c"><span class="pl-c">//</span> auto async_file = spdlog::create_async&lt;spdlog::sinks::basic_file_sink_mt&gt;("async_file_logger", "logs/async_log.txt");   </span>
 }
 </pre><div class="zeroclipboard-container">
-    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="#include &quot;spdlog/async.h&quot;
-#include &quot;spdlog/sinks/basic_file_sink.h&quot;
-void async_example()
-{
-    // default thread pool settings can be modified *before* creating the async logger:
-    // spdlog::init_thread_pool(8192, 1); // queue with 8k items and 1 backing thread.
-    auto async_file = spdlog::basic_logger_mt<spdlog::async_factory>(&quot;async_file_logger&quot;, &quot;logs/async_log.txt&quot;);
-    // alternatively:
-    // auto async_file = spdlog::create_async<spdlog::sinks::basic_file_sink_mt>(&quot;async_file_logger&quot;, &quot;logs/async_log.txt&quot;);   
-}
-" tabindex="0" role="button">
+    
      
 </svg>
     </clipboard-copy>
@@ -423,18 +303,7 @@ void async_example()
     <span class="pl-k">auto</span> logger = std::make_shared&lt;spdlog::async_logger&gt;(<span class="pl-s"><span class="pl-pds">"</span>loggername<span class="pl-pds">"</span></span>, sinks.<span class="pl-c1">begin</span>(), sinks.<span class="pl-c1">end</span>(), <span class="pl-c1">spdlog::thread_pool</span>(), spdlog::async_overflow_policy::block);
     <span class="pl-c1">spdlog::register_logger</span>(logger);
 }</pre><div class="zeroclipboard-container">
-    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="#include &quot;spdlog/sinks/stdout_color_sinks.h&quot;
-#include &quot;spdlog/sinks/rotating_file_sink.h&quot;
-
-void multi_sink_example2()
-{
-    spdlog::init_thread_pool(8192, 1);
-    auto stdout_sink = std::make_shared<spdlog::sinks::stdout_color_sink_mt >();
-    auto rotating_sink = std::make_shared<spdlog::sinks::rotating_file_sink_mt>(&quot;mylog.txt&quot;, 1024*1024*10, 3);
-    std::vector<spdlog::sink_ptr> sinks {stdout_sink, rotating_sink};
-    auto logger = std::make_shared<spdlog::async_logger>(&quot;loggername&quot;, sinks.begin(), sinks.end(), spdlog::thread_pool(), spdlog::async_overflow_policy::block);
-    spdlog::register_logger(logger);
-}" tabindex="0" role="button">
+   
     
 </svg>
     </clipboard-copy>
@@ -455,21 +324,7 @@ void multi_sink_example2()
     <span class="pl-c1">spdlog::info</span>(<span class="pl-s"><span class="pl-pds">"</span>user defined type: {}<span class="pl-pds">"</span></span>, <span class="pl-c1">my_type</span>(<span class="pl-c1">14</span>));
 }
 </pre><div class="zeroclipboard-container">
-    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="template<>
-struct fmt::formatter<my_type> : fmt::formatter<std::string>
-{
-    auto format(my_type my, format_context &amp;ctx) const -> decltype(ctx.out())
-    {
-        return format_to(ctx.out(), &quot;[my_type i={}]&quot;, my.i);
-    }
-};
-
-void user_defined_example()
-{
-    spdlog::info(&quot;user defined type: {}&quot;, my_type(14));
-}
-" tabindex="0" role="button">
-     
+    
 </svg>
     </clipboard-copy>
   </div></div>
@@ -500,31 +355,7 @@ void user_defined_example()
     <span class="pl-c1">spdlog::set_formatter</span>(<span class="pl-c1">std::move</span>(formatter));
 }
 </pre><div class="zeroclipboard-container">
-    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="// Log patterns can contain custom flags.
-// the following example will add new flag '%*' - which will be bound to a <my_formatter_flag> instance.
-#include &quot;spdlog/pattern_formatter.h&quot;
-class my_formatter_flag : public spdlog::custom_flag_formatter
-{
-public:
-    void format(const spdlog::details::log_msg &amp;, const std::tm &amp;, spdlog::memory_buf_t &amp;dest) override
-    {
-        std::string some_txt = &quot;custom-flag&quot;;
-        dest.append(some_txt.data(), some_txt.data() + some_txt.size());
-    }
-
-    std::unique_ptr<custom_flag_formatter> clone() const override
-    {
-        return spdlog::details::make_unique<my_formatter_flag>();
-    }
-};
-
-void custom_flags_example()
-{    
-    auto formatter = std::make_unique<spdlog::pattern_formatter>();
-    formatter->add_flag<my_formatter_flag>('*').set_pattern(&quot;[%n] [%*] [%^%l%$] %v&quot;);
-    spdlog::set_formatter(std::move(formatter));
-}
-" tabindex="0" role="button">
+   
      
 </svg>
     </clipboard-copy>
@@ -538,13 +369,7 @@ void custom_flags_example()
     <span class="pl-c1">spdlog::get</span>(<span class="pl-s"><span class="pl-pds">"</span>console<span class="pl-pds">"</span></span>)-&gt;<span class="pl-c1">info</span>(<span class="pl-s"><span class="pl-pds">"</span>some invalid message to trigger an error {}{}{}{}<span class="pl-pds">"</span></span>, <span class="pl-c1">3</span>);
 }
 </pre><div class="zeroclipboard-container">
-    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="void err_handler_example()
-{
-    // can be set globally or per logger(logger->set_error_handler(..))
-    spdlog::set_error_handler([](const std::string &amp;msg) { spdlog::get(&quot;console&quot;)->error(&quot;*** LOGGER ERROR ***: {}&quot;, msg); });
-    spdlog::get(&quot;console&quot;)->info(&quot;some invalid message to trigger an error {}{}{}{}&quot;, 3);
-}
-" tabindex="0" role="button">
+   
       
 </svg>
     </clipboard-copy>
@@ -558,13 +383,6 @@ void custom_flags_example()
     <span class="pl-k">auto</span> syslog_logger = <span class="pl-c1">spdlog::syslog_logger_mt</span>(<span class="pl-s"><span class="pl-pds">"</span>syslog<span class="pl-pds">"</span></span>, ident, LOG_PID);
     syslog_logger-&gt;<span class="pl-c1">warn</span>(<span class="pl-s"><span class="pl-pds">"</span>This is warning that will end up in syslog.<span class="pl-pds">"</span></span>);
 }</pre><div class="zeroclipboard-container">
-    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="#include &quot;spdlog/sinks/syslog_sink.h&quot;
-void syslog_example()
-{
-    std::string ident = &quot;spdlog-example&quot;;
-    auto syslog_logger = spdlog::syslog_logger_mt(&quot;syslog&quot;, ident, LOG_PID);
-    syslog_logger->warn(&quot;This is warning that will end up in syslog.&quot;);
-}" tabindex="0" role="button">
       
 </svg>
     </clipboard-copy>
@@ -578,13 +396,6 @@ void syslog_example()
     <span class="pl-k">auto</span> android_logger = <span class="pl-c1">spdlog::android_logger_mt</span>(<span class="pl-s"><span class="pl-pds">"</span>android<span class="pl-pds">"</span></span>, tag);
     android_logger-&gt;<span class="pl-c1">critical</span>(<span class="pl-s"><span class="pl-pds">"</span>Use <span class="pl-cce">\"</span>adb shell logcat<span class="pl-cce">\"</span> to view this message.<span class="pl-pds">"</span></span>);
 }</pre><div class="zeroclipboard-container">
-    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="#include &quot;spdlog/sinks/android_sink.h&quot;
-void android_example()
-{
-    std::string tag = &quot;spdlog-android&quot;;
-    auto android_logger = spdlog::android_logger_mt(&quot;android&quot;, tag);
-    android_logger->critical(&quot;Use \&quot;adb shell logcat\&quot; to view this message.&quot;);
-}" tabindex="0" role="button">
      
 </svg>
     </clipboard-copy>
@@ -600,15 +411,6 @@ void android_example()
     <span class="pl-c"><span class="pl-c">//</span> #include "spdlog/cfg/argv.h" // for loading levels from argv</span>
     <span class="pl-c"><span class="pl-c">//</span> spdlog::cfg::load_argv_levels(argc, argv);</span>
 }</pre><div class="zeroclipboard-container">
-    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="#include &quot;spdlog/cfg/env.h&quot;
-int main (int argc, char *argv[])
-{
-    spdlog::cfg::load_env_levels();
-    // or from the command line:
-    // ./example SPDLOG_LEVEL=info,mylogger=trace
-    // #include &quot;spdlog/cfg/argv.h&quot; // for loading levels from argv
-    // spdlog::cfg::load_argv_levels(argc, argv);
-}" tabindex="0" role="button">
     
 </svg>
     </clipboard-copy>
@@ -616,8 +418,7 @@ int main (int argc, char *argv[])
 <p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">那么你可以：</font></font></p>
 <div class="highlight highlight-text-shell-session notranslate position-relative overflow-auto" dir="auto"><pre>$ <span class="pl-s1"><span class="pl-k">export</span> SPDLOG_LEVEL=info,mylogger=trace</span>
 $ <span class="pl-s1">./example</span></pre><div class="zeroclipboard-container">
-    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="$ export SPDLOG_LEVEL=info,mylogger=trace
-$ ./example" tabindex="0" role="button">
+    
      
 </svg>
     </clipboard-copy>
@@ -636,18 +437,7 @@ $ ./example" tabindex="0" role="button">
     handlers.<span class="pl-smi">after_close</span> = [](spdlog::<span class="pl-c1">filename_t</span> filename) { <span class="pl-c1">spdlog::info</span>(<span class="pl-s"><span class="pl-pds">"</span>After closing {}<span class="pl-pds">"</span></span>, filename); };
     <span class="pl-k">auto</span> my_logger = <span class="pl-c1">spdlog::basic_logger_st</span>(<span class="pl-s"><span class="pl-pds">"</span>some_logger<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>logs/events-sample.txt<span class="pl-pds">"</span></span>, <span class="pl-c1">true</span>, handlers);        
 }</pre><div class="zeroclipboard-container">
-    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="// You can get callbacks from spdlog before/after a log file has been opened or closed. 
-// This is useful for cleanup procedures or for adding something to the start/end of the log file.
-void file_events_example()
-{
-    // pass the spdlog::file_event_handlers to file sinks for open/close log file notifications
-    spdlog::file_event_handlers handlers;
-    handlers.before_open = [](spdlog::filename_t filename) { spdlog::info(&quot;Before opening {}&quot;, filename); };
-    handlers.after_open = [](spdlog::filename_t filename, std::FILE *fstream) { fputs(&quot;After opening\n&quot;, fstream); };
-    handlers.before_close = [](spdlog::filename_t filename, std::FILE *fstream) { fputs(&quot;Before closing\n&quot;, fstream); };
-    handlers.after_close = [](spdlog::filename_t filename) { spdlog::info(&quot;After closing {}&quot;, filename); };
-    auto my_logger = spdlog::basic_logger_st(&quot;some_logger&quot;, &quot;logs/events-sample.txt&quot;, true, handlers);        
-}" tabindex="0" role="button">
+    
      
 </svg>
     </clipboard-copy>
@@ -660,13 +450,7 @@ void file_events_example()
     <span class="pl-c1">spdlog::set_default_logger</span>(new_logger);
     <span class="pl-c1">spdlog::info</span>(<span class="pl-s"><span class="pl-pds">"</span>new logger log message<span class="pl-pds">"</span></span>);
 }</pre><div class="zeroclipboard-container">
-    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="void replace_default_logger_example()
-{
-    auto new_logger = spdlog::basic_logger_mt(&quot;new_default_logger&quot;, &quot;logs/new-default-log.txt&quot;, true);
-    spdlog::set_default_logger(new_logger);
-    spdlog::info(&quot;new logger log message&quot;);
-}" tabindex="0" role="button">
-     
+   
 </svg>
     </clipboard-copy>
   </div></div>
@@ -683,17 +467,7 @@ void file_events_example()
     <span class="pl-k">auto</span> logger = <span class="pl-c1">spdlog::qt_color_logger_mt</span>(<span class="pl-s"><span class="pl-pds">"</span>qt_logger<span class="pl-pds">"</span></span>, log_widget, max_lines);
     logger-&gt;<span class="pl-c1">info</span>(<span class="pl-s"><span class="pl-pds">"</span>Some info message<span class="pl-pds">"</span></span>);
 }</pre><div class="zeroclipboard-container">
-    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="#include &quot;spdlog/spdlog.h&quot;
-#include &quot;spdlog/sinks/qt_sinks.h&quot;
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
-{
-    setMinimumSize(640, 480);
-    auto log_widget = new QTextEdit(this);
-    setCentralWidget(log_widget);
-    int max_lines = 500; // keep the text widget to max 500 lines. remove old lines if needed.
-    auto logger = spdlog::qt_color_logger_mt(&quot;qt_logger&quot;, log_widget, max_lines);
-    logger->info(&quot;Some info message&quot;);
-}" tabindex="0" role="button">
+  
       
 </svg>
     </clipboard-copy>
